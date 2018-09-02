@@ -1,0 +1,22 @@
+{
+    "name": "twedoo/twedoo-load-config",
+    "type": "symfony-bundle",
+    "description": "Symfony Twedoo Load Bundle Configure",
+    "keywords": ["service custom load config"],
+    "homepage": "https://github.com/Maamriya",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Houssem Maamria",
+            "email": "mail.houssem@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "symfony\\Twedoo\\": ""
+        },
+    },
+}
