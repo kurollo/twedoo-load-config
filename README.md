@@ -4,6 +4,17 @@ Symfony autoload routing, config, services
 ## Description
 Load Service Configuration from inside a Bundles.
 
-## Install package
-<hr>
-    composer require twedoo/twedoo-load-config
+Documentation
+-------------
+
+ 
+
+Installation
+------------
+
+All the installation instructions are located in the documentation.
+
+License
+-------
+
+This bundle is under the MIT license. See the complete license [in the bundle](LICENSE)
