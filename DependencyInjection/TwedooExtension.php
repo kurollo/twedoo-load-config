@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class CoreBaseExtension extends Extension
+class TwedooExtension extends Extension
 {
     public $configs = [];
     /**
@@ -30,6 +30,12 @@ class CoreBaseExtension extends Extension
         $dirGlobal = $container->getParameter('kernel.project_dir');
         $dir = $dirGlobal.'/src/';
         $getBundles = preg_grep('/^([^.])/', array_diff(scandir($dir, 1), array('..', '.')));
+
+        $loader = new Loader\YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__.'/../services/')
+        );
+        $loader->load('services.yml');
 
         foreach ($getBundles as $bundle)
         {
@@ -42,16 +48,16 @@ class CoreBaseExtension extends Extension
             if(file_exists($getFileLocator.'/config.yml'))
             {
                 $loader->load('config.yml');
-                $this->configs = Yaml::parse(file_get_contents($getFileLocator.'/config.yml'))['parameters']['core_base'];
+                $this->configs = Yaml::parse(file_get_contents($getFileLocator.'/config.yml'))['parameters']['twedoo_load'];
 
                 foreach ($this->configs as $key => $attribute) {
                     if(is_array($attribute) && strpos($key, '[]') !== false)
                     {
                         foreach ($attribute as $param => $value)
-                            $container->setParameter('core_base.'.$key.'.'.$param, $value);
+                            $container->setParameter('twedoo_load.'.$key.'.'.$param, $value);
                     }
                     else{
-                        $container->setParameter('core_base.'.$key, $attribute);
+                        $container->setParameter('twedoo_load.'.$key, $attribute);
                     }
                 }
             }
@@ -63,12 +69,12 @@ class CoreBaseExtension extends Extension
 
     public function getAlias()
     {
-        return 'core_base';
+        return 'twedoo';
     }
 
     public function getNamespace()
     {
-        return 'CoreBaseBundle';
+        return 'twedoo';
 
     }
 
