@@ -1,2 +1,5 @@
 # twedoo-load-config
-Symfony autload routing, config, services
+Symfony autoload routing, config, services
+
+## Description
+Load Service Configuration from inside a Bundles.
