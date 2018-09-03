@@ -7,7 +7,7 @@ Load Service Configuration from inside a Bundles.
 Documentation
 -------------
 
- 
+ link packagist : https://packagist.org/packages/twedoo/twedoo-load-config
 
 Installation
 ------------
@@ -17,4 +17,4 @@ All the installation instructions are located in the documentation.
 License
 -------
 
-This bundle is under the MIT license. See the complete license [in the bundle](LICENSE)
+This package is under the MIT license.
