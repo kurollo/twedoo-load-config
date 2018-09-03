@@ -18,10 +18,5 @@
         "psr-4": {
             "symfony\\Twedoo\\": ""
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": ~
-        }
     }
 }
