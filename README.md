@@ -10,6 +10,7 @@ Installation
  link packagist : https://packagist.org/packages/twedoo/twedoo-load-config
 
 
+
 **1.** **Install package :**
 
   Install with composer run `composer require twedoo/twedoo-load-config` to include this in your project. 
@@ -23,6 +24,8 @@ Installation
  }
  ```
  and run `composer update`
+
+
 
 **2.** **Configuration package :** 
 
@@ -39,8 +42,13 @@ app_extra:
 
 ```
 
+
+
 Documentation
 -------------
+
+Wiki : https://github.com/Maamriya/twedoo-load-config/wiki/Install-package-Symfony-Twedoo-Load-Config
+
 
 This package provider new extention name `twedoo_load`.
 
@@ -61,6 +69,8 @@ parameters:
         exemple_key2: exemple_value2
         exemple_key3: exemple_value3
 ```
+
+
 
 License
 -------
