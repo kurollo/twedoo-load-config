@@ -2,7 +2,7 @@
     "name": "twedoo/twedoo-load-config",
     "type": "symfony-bundle",
     "description": "Symfony Twedoo Load Bundle Configure",
-    "keywords": ["service custom load config"],
+    "keywords": ["custom Route Loader Friendly Configuration Bundle"],
     "homepage": "https://github.com/Maamriya",
     "license": "MIT",
     "authors": [
