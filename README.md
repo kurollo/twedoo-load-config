@@ -20,7 +20,7 @@ Installation
  ```
  required-dev:
  {
-    twedoo/twedoo-load-config: '^1.0'
+    twedoo/twedoo-load-config: '^1.0.1'
  }
  ```
  and run `composer update`
