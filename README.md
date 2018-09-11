@@ -43,6 +43,17 @@ app_extra:
 ```
 
 
+Add in app/config/config.yml in extension 'parameters' 
+
+```
+parameters:
+    directories_inside_src: ['back', 'front']
+
+```
+'directories_inside_src' this content list of directories inside src folder if you change target directory bundle like this exemple:
+
+src/back/UsersBundle or src/front/ApiBundle
+
 
 Documentation
 -------------

@@ -22,14 +22,30 @@ use Symfony\Component\DependencyInjection\Loader;
 class TwedooExtension extends Extension
 {
     public $configs = [];
+    public $getBundles = [];
+    public $ignoreDir = ['..', '.'];
     /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
         $dirGlobal = $container->getParameter('kernel.project_dir');
+        $dirInSrc  = $container->getParameter('directories_inside_src');
+
+        if(is_array($dirInSrc))
+        {
+            foreach ($dirInSrc as $key => $dirName)
+            {
+                $dir = $dirGlobal.'/src/'.$dirName.'/';
+                if (is_dir($dir )) {
+                    $this->getBundles[$dir] = preg_grep('/^([^.])/', array_diff(scandir($dir, 1), $this->ignoreDir));
+                }
+            }
+            $this->ignoreDir = array_merge($this->ignoreDir, $dirInSrc);
+        }
+
         $dir = $dirGlobal.'/src/';
-        $getBundles = preg_grep('/^([^.])/', array_diff(scandir($dir, 1), array('..', '.')));
+        $this->getBundles[$dir] = preg_grep('/^([^.])/', array_diff(scandir($dir, 1),  $this->ignoreDir));
 
         $loader = new Loader\YamlFileLoader(
             $container,
@@ -37,34 +53,43 @@ class TwedooExtension extends Extension
         );
         $loader->load('services.yml');
 
-        foreach ($getBundles as $bundle)
+        foreach ($this->getBundles as $path => $bundles)
         {
-            $getFileLocator = $dir.$bundle.'/Resources/config';
-            $loader = new Loader\YamlFileLoader(
-                $container,
-                new FileLocator($getFileLocator)
-            );
-
-            if(file_exists($getFileLocator.'/config.yml'))
+            foreach ($bundles as $bundle)
             {
-                $loader->load('config.yml');
-                $this->configs = Yaml::parse(file_get_contents($getFileLocator.'/config.yml'))['parameters']['twedoo_load'];
+                $getFileLocator = $path.$bundle.'/Resources/config';
+                
+                if (!is_dir($getFileLocator ))
+                    continue;
 
-                foreach ($this->configs as $key => $attribute) {
-                    if(is_array($attribute) && strpos($key, '[]') !== false)
-                    {
-                        foreach ($attribute as $param => $value)
-                            $container->setParameter('twedoo_load.'.$key.'.'.$param, $value);
-                    }
-                    else{
-                        $container->setParameter('twedoo_load.'.$key, $attribute);
+
+                $loader = new Loader\YamlFileLoader(
+                    $container,
+                    new FileLocator($getFileLocator)
+                );
+
+                if(file_exists($getFileLocator.'/config.yml'))
+                {
+                    $loader->load('config.yml');
+                    $this->configs = Yaml::parse(file_get_contents($getFileLocator.'/config.yml'))['parameters']['twedoo_load'];
+
+                    foreach ($this->configs as $key => $attribute) {
+                        if(is_array($attribute) && strpos($key, '[]') !== false)
+                        {
+                            foreach ($attribute as $param => $value)
+                                $container->setParameter('twedoo_load.'.$key.'.'.$param, $value);
+                        }
+                        else{
+                            $container->setParameter('twedoo_load.'.$key, $attribute);
+                        }
                     }
                 }
-            }
 
-            if(file_exists($getFileLocator.'/services.yml'))
-                $loader->load('services.yml');
+                if(file_exists($getFileLocator.'/services.yml'))
+                    $loader->load('services.yml');
+            }
         }
+
     }
 
     public function getAlias()
