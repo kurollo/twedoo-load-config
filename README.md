@@ -23,7 +23,7 @@ Installation
     twedoo/twedoo-load-config: '^1.0.1'
  }
  ```
- and run `composer update`
+ and run `composer install`
 
 
 
