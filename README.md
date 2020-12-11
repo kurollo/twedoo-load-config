@@ -2,7 +2,7 @@
 
 ## Description
 
-Using Symfony modular, simple loading all file yml (configuration and services and routing) from inside each Bundle and inject it in config global.
+Using Symfony modular, simple load files yml (configuration and services and routing) from each Bundle and inject it in config global.
 
 Installation
 ------------
