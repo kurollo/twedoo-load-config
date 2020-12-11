@@ -63,9 +63,7 @@ Wiki : https://github.com/Maamriya/twedoo-load-config/wiki/Install-package-Symfo
 
 This package provider new extension name `twedoo_load`.
 
-* In your Bundle create directory `/src/appBundle/Resources/` it's content all files config  (config.yml, services.yml, routing.yml) inside the directory config see this image:
-
-![description path dir config](https://pli.io/nTrjx.png)
+* In your Bundle create directory `/src/appBundle/Resources/` it's content all files config  (config.yml, services.yml, routing.yml) inside the directory config. 
 
 * In your file `appBundle/Resources/config/routing.yml` put all of routing of this Bundle here without touch `app/config/routing.yml`.
 
